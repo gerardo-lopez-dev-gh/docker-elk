@@ -35,7 +35,7 @@ services:
         ELASTIC_VERSION: 8.15.0
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,Z
-      - elasticsearch:/usr/share/elasticsearch/data:Z
+      - /mnt/things/volume/elasticsearch:/usr/share/elasticsearch/data:Z
     ports:
       - 9200:9200
       - 9300:9300
@@ -57,6 +57,7 @@ services:
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
+      - /mnt/things/volume/logstash:/usr/share/logstash/data:Z
     ports:
       - 5044:5044
       - 50000:50000/tcp
@@ -79,6 +80,7 @@ services:
         ELASTIC_VERSION: 8.15.0
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
+      - /mnt/things/volume/kibana:/usr/share/kibana/data:Z
     ports:
       - 5601:5601
     environment:
@@ -97,3 +99,8 @@ networks:
 
 volumes:
   elasticsearch:
+    driver: local
+  logstash:
+    driver: local
+  kibana:
+    driver: local
