@@ -5,3 +5,4 @@
 http.host: 0.0.0.0
 
 node.name: logstash
+pipeline.ecs_compatibility: v1
